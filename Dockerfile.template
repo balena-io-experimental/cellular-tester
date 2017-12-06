@@ -1,0 +1,32 @@
+# FROM resin/raspberrypi3-debian:jessie
+FROM arm32v7/debian:jessie
+
+# Override the default entry.sh
+# COPY entry.sh /usr/bin/entry.sh 
+# RUN chmod +x /usr/bin/entry.sh
+# COPY udev-rules/* /lib/udev/rules.d/
+
+WORKDIR /usr/src/app
+
+# RUN apt-get update && apt-get install -yq \
+# 	curl smstools wireless-tools && \
+# 	apt-get clean && rm -rf /tmp/*
+
+# RUN systemctl disable ModemManager.service
+# RUN systemctl mask ModemManager.service
+# RUN systemctl disable ModemManager
+# RUN systemctl mask ModemManager
+
+# Copy all our source
+COPY src/start.sh /usr/src/app
+COPY src/bashrc /root/.bashrc
+
+# Install mmcli binary
+COPY src/mmcli /usr/bin/mmcli
+COPY src/mmcli_libs /usr/lib
+RUN chmod +x /usr/bin/mmcli
+
+# For cellular we have to ensure systemd is off, it messes with things alot.
+# ENV INITSYSTEM off
+
+CMD ["bash", "/usr/src/app/start.sh"]
