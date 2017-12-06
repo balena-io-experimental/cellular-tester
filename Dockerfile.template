@@ -2,9 +2,9 @@ FROM resin/raspberrypi3-debian:jessie
 # FROM arm32v7/debian:jessie
 
 # deal with container udev issues
-COPY entry.sh /usr/bin/entry.sh 
-RUN chmod +x /usr/bin/entry.sh
-COPY udev-rules/* /lib/udev/rules.d/
+# COPY entry.sh /usr/bin/entry.sh 
+# RUN chmod +x /usr/bin/entry.sh
+# COPY udev-rules/* /lib/udev/rules.d/
 
 WORKDIR /usr/src/app
 
