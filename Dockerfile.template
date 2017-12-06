@@ -8,9 +8,9 @@ FROM arm32v7/debian:jessie
 
 WORKDIR /usr/src/app
 
-# RUN apt-get update && apt-get install -yq \
-# 	curl smstools wireless-tools && \
-# 	apt-get clean && rm -rf /tmp/*
+RUN apt-get update && apt-get install -yq \
+	smstools && \
+	apt-get clean && rm -rf /tmp/*
 
 # RUN systemctl disable ModemManager.service
 # RUN systemctl mask ModemManager.service
